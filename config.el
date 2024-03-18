@@ -133,7 +133,7 @@
   :after org
   :init (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (file-truename "/Users/daniel.munoz/Library/CloudStorage/OneDrive-UniversidadCatólicadeChile/Documents/ORG-ROAM"))
+  (org-roam-directory (file-truename "/Users/daniel.munoz/ORG-ROAM"))
   :config
   (org-roam-db-autosync-enable)
   )
