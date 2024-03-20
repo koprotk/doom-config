@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: New frame
+# uuid:
+# key: frame
+# condition: t
+# --
+\begin{frame}{Title}
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			%some text
+		\end{column}
+		\begin{column}{.5\textwidth}
+			%some text
+		\end{column}
+	\end{columns}
+\end{frame}

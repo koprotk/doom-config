@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: beamer-preambule
+# uuid:
+# key: beamer-preambule
+# condition: t
+# --
+\documentclass[11pt, aspectratio=169, xcolor=table]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage[spanish]{babel}
+\usepackage{pdfrender}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{smartdiagram}
+\usetheme{default}
+\bibliographystyle{../apalike-es} %archivo de estilo apa ../apa-es en español en el directorio
+
+\usepackage{../template/mineduc169template}
+
+  \author{Prof. Daniel Muñoz \\
+    \texttt{dmunoz@miuandes.cl}
+    }
+  \title{Evaluación}
+  \subtitle{Clase 1: Bienvenida}
+  \date{6 de marzo de 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\end{document}
