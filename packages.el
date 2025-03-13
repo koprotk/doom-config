@@ -10,7 +10,6 @@
 
 (package! circadian)
 (package! csv-mode)
-(package! guess-language)
 (package! org-ref)
 
 ;; To install a package directly from a remote git repo, you must specify a

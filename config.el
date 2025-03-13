@@ -90,6 +90,10 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;;Autosave
+(setq auto-save-default t
+      make-backup-files t)
+
 ;;Org mode config
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
@@ -133,7 +137,7 @@
   :after org
   :init (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (file-truename "/Users/daniel.munoz/ORG-ROAM"))
+  (org-roam-directory (file-truename "/Users/daniel.munoz/org/org-roam"))
   :config
   (org-roam-db-autosync-enable)
   )
@@ -171,11 +175,71 @@
 (setq org-journal-enable-agenda-integration t)
 (require 'org-journal)
 
-;;Guess-language
-(require 'guess-language)
-(setq guess-language-languages '(en es))
-(setq guess-language-min-paragrah-length 35)
-(add-hook 'text-mode-hook (lambda () (guess-language-mode 1)))
-
 ;;Latex
+(add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
+(add-hook 'org-mode-hook #'turn-on-org-cdlatex)
 (setq org-latex-src-block-backend 'listings)
+
+(add-to-list 'load-path "/usr/local/bin")
+(require 'lsp-latex)
+
+(add-hook 'latex-mode-hook (lambda() (add-to-list 'tex-compile-commands '("latexmk -pv -pdf -bibtex %r"))))
+;; "texlab" executable must be located at a directory contained in `exec-path'.
+;; If you want to put "texlab" somewhere else,
+;; you can specify the path to "texlab" as follows:
+(setq lsp-latex-texlab-executable "/usr/local/bin/texlab")
+
+(with-eval-after-load "tex-mode"
+  (add-hook 'tex-mode-hook 'lsp)
+  (add-hook 'latex-mode-hook 'lsp)
+  ) ;;with AUCTeX LaTeX mode
+
+;; For YaTeX
+(with-eval-after-load "yatex"
+  (add-hook 'yatex-mode-hook 'lsp))
+
+;; For bibtex
+(with-eval-after-load "bibtex"
+  (add-hook 'bibtex-mode-hook 'lsp))
+
+;;Projectile
+(after! projectile
+  (setq projectile-project-search-path '("~/Projects/"))
+  (setq projectile-enable-caching t))
+
+;;Java TestNg custom command:
+(defun get-testng-classname ()
+  "Get the fully qualified TestNG class name from the current buffer."
+  (let* ((default-directory (project-root (project-current t))) ;; Ensure execution from project root
+         (file-path (file-relative-name (buffer-file-name) (concat default-directory "src/"))) ;; Get relative path
+         (test-class (replace-regexp-in-string "/" "." (file-name-sans-extension file-path)))) ;; Convert to FQCN
+    test-class)) ;; Return class name
+
+(defun run-testng ()
+  "Run a TestNG test from the current buffer.
+Prompts the user for a method name. If left empty, runs the whole test class.
+Otherwise, runs the specified method."
+  (interactive)
+  (let* ((classpath "./build/libs/dependencies/*:./build/classes/java/main:./build/resources/main")
+         (config-dir "./build/classes/java/main/com/modmed/bugspray/config")
+         (testng-classpath "./test/com/modmed/bugspray/core/suites")
+         (test-class (get-testng-classname)) ;; Use reusable function
+         (method-name (read-string "Enter method name (leave empty to run entire class): " nil nil ""))
+         (testng-args (if (string-empty-p method-name)
+                          (format "-testclass %s" test-class)
+                        (format "-methods %s.%s" test-class method-name)))
+         (command (format "./gradlew build && java -cp \"%s\" -Dconfig.dir=%s -Dtestng.test.classpath=%s org.testng.TestNG %s"
+                          classpath config-dir testng-classpath testng-args)))
+    (compile command)))
+
+(defun copy-testng-classname ()
+  "Copy the fully qualified TestNG class name to the clipboard."
+  (interactive)
+  (let ((test-class (get-testng-classname)))
+    (kill-new test-class)
+    (message "Copied to clipboard: %s" test-class)))
+
+(map! :leader
+      (:prefix ("m" . "TestNG")
+       :desc "Run TestNG test" "r" #'run-testng
+       :desc "Copy TestNG class" "c" #'copy-testng-classname))
