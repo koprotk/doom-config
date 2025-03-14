@@ -220,17 +220,27 @@
 Prompts the user for a method name. If left empty, runs the whole test class.
 Otherwise, runs the specified method."
   (interactive)
+  ;; Ensure projectile is open before
+
   (let* ((classpath "./build/libs/dependencies/*:./build/classes/java/main:./build/resources/main")
          (config-dir "./build/classes/java/main/com/modmed/bugspray/config")
          (testng-classpath "./test/com/modmed/bugspray/core/suites")
          (test-class (get-testng-classname)) ;; Use reusable function
-         (method-name (read-string "Enter method name (leave empty to run entire class): " nil nil ""))
+         (method-name (read-string "Enter method name (leave empty to run entire class): "))
          (testng-args (if (string-empty-p method-name)
                           (format "-testclass %s" test-class)
                         (format "-methods %s.%s" test-class method-name)))
+         (default-directory (projectile-project-root))
+
          (command (format "./gradlew build && java -cp \"%s\" -Dconfig.dir=%s -Dtestng.test.classpath=%s org.testng.TestNG %s"
                           classpath config-dir testng-classpath testng-args)))
-    (compile command)))
+
+    ;; Debugging messages
+    (message "This is the default directory: %s" default-directory)
+    (message "This is the get-testng-classname: %s" test-class)
+    ;; Run the command
+    (projectile-run-async-shell-command-in-root command)))
+
 
 (defun copy-testng-classname ()
   "Copy the fully qualified TestNG class name to the clipboard."
@@ -239,7 +249,26 @@ Otherwise, runs the specified method."
     (kill-new test-class)
     (message "Copied to clipboard: %s" test-class)))
 
+(defun run-testng-debug ()
+  "Compile the project, then run TestNG test in JDB inside a vterm shell.
+If a method is provided, use -method instead of -testclass."
+  (interactive)
+  (let* ((sourcepath "./build/classes/java/main:./build/resources/main") ;; Ensure project root
+         (classpath "./build/libs/dependencies/*:./build/classes/java/main:./build/resources/main")
+         (config-dir "./build/classes/java/main/com/modmed/bugspray/config")
+         (testng-classpath "./test/com/modmed/bugspray/core/suites")
+         (test-class (or (get-testng-classname) "")) ;; Get test class
+         (method-name (read-string "Enter method name (leave empty to run whole class): " nil nil "")) ;; Ask user for method
+         (testng-args (if (string-empty-p method-name)
+                          (format "-testclass %s" test-class)
+                        (format "-methods %s.%s" test-class method-name)))
+         (default-directory (projectile-project-root))
+         (command (format "./gradlew build && jdb -sourcepath \"%s\" -classpath \"%s\" -Dtestng.test.classpath=%s -Dconfig.dir=%s org.testng.TestNG %s"
+                          sourcepath classpath testng-classpath config-dir testng-args)))
+    (compile command)))
+
 (map! :leader
       (:prefix ("m" . "TestNG")
        :desc "Run TestNG test" "r" #'run-testng
+       :desc "Debug TestNG test" "d" #'run-testng-debug
        :desc "Copy TestNG class" "c" #'copy-testng-classname))
