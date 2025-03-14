@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: request
+# uuid:
+# key: request
+# condition: t
+# --
+
+#+TITLE: Web | FHIR API: Create ValueSet Resource for Clipboard Section
+#+AUTHOR: Daniel Muñoz
+#+SOURCE: [[https://jira.modernizingmedicine.com/browse/EFOPTOMETRY-6623][EF-6623]]
+#+DATE: <2024-03-27 Wed>
+
+#+begin_src restclient
+
+GET https://eyefinity.m2qa.com/ema/fhir/v2/ValueSet/social-history
+Authorization: Basic Zmhpcl9zSlVkSjpJVjRqc25lbXZH
+User-Agent: Emacs29
+
+#+end_src

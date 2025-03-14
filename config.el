@@ -232,7 +232,7 @@ Otherwise, runs the specified method."
                         (format "-methods %s.%s" test-class method-name)))
          (default-directory (projectile-project-root))
 
-         (command (format "./gradlew build && java -cp \"%s\" -Dconfig.dir=%s -Dtestng.test.classpath=%s org.testng.TestNG %s"
+         (command (format "./gradlew build && java -Xms512m -Xmx1024m -cp \"%s\" -Dconfig.dir=%s -Dtestng.test.classpath=%s org.testng.TestNG %s"
                           classpath config-dir testng-classpath testng-args)))
 
     ;; Debugging messages
@@ -263,7 +263,7 @@ If a method is provided, use -method instead of -testclass."
                           (format "-testclass %s" test-class)
                         (format "-methods %s.%s" test-class method-name)))
          (default-directory (projectile-project-root))
-         (command (format "./gradlew build && jdb -sourcepath \"%s\" -classpath \"%s\" -Dtestng.test.classpath=%s -Dconfig.dir=%s org.testng.TestNG %s"
+         (command (format "./gradlew build && jdb -Xms512m -Xmx1024m -sourcepath \"%s\" -classpath \"%s\" -Dtestng.test.classpath=%s -Dconfig.dir=%s org.testng.TestNG %s"
                           sourcepath classpath testng-classpath config-dir testng-args)))
     (compile command)))
 
