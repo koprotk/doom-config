@@ -137,7 +137,7 @@
   :after org
   :init (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (file-truename "/Users/daniel.munoz/org/org-roam"))
+  (org-roam-directory (file-truename "~/org/org-roam"))
   :config
   (org-roam-db-autosync-enable)
   )
@@ -181,6 +181,7 @@
 (setq org-latex-src-block-backend 'listings)
 
 (add-to-list 'load-path "/usr/local/bin")
+(add-to-list 'load-path "~/.cargo/bin")
 (require 'lsp-latex)
 
 (add-hook 'latex-mode-hook (lambda() (add-to-list 'tex-compile-commands '("latexmk -pv -pdf -bibtex %r"))))
