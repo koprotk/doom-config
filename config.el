@@ -181,6 +181,7 @@
 (setq org-latex-src-block-backend 'listings)
 
 (add-to-list 'load-path "/usr/local/bin")
+(add-to-list 'load-path "~/.doom.d/lsp-latex")
 (add-to-list 'load-path "~/.cargo/bin")
 (require 'lsp-latex)
 
