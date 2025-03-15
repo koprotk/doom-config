@@ -1,0 +1,3 @@
+[submodule "lsp-latex"]
+	path = modules
+	url = git@github.com:ROCKTAKEY/lsp-latex.git
