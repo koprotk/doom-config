@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Daniel Muñoz"
-      user-mail-address "daniel.munoz@modemed.com")
+      user-mail-address "daniel.munoz@modmed.com")
 
 (setq default-directory (concat(getenv "HOME") "/"))
 
@@ -92,6 +92,7 @@
 
 ;;Autosave
 (setq auto-save-default t
+      auto-save-visited-mode t
       make-backup-files t)
 
 ;;Org mode config
@@ -126,13 +127,30 @@
         (holiday-fixed 10 27 "Día de las Iglesias Evangélicas y Protestantes")
         (holiday-fixed 11 1 "Día de todos los Santos")
         (holiday-fixed 12 8 "Inmaculada Concepción")
-        (holiday-fixed 12 17 "Plebiscito Nacional")
         (holiday-fixed 12 25 "Navidad")
         )
       )
 
-;;Org mode ROAM config
+;;Move lines
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
 
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(global-set-key (kbd "M-<up>")  'move-line-up)
+(global-set-key (kbd "M-<down>")  'move-line-down)
+
+;;Org mode ROAM config
 (use-package org-roam
   :after org
   :init (setq org-roam-v2-ack t)
