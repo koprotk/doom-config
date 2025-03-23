@@ -194,33 +194,16 @@
 (require 'org-journal)
 
 ;;Latex
-(add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
-(add-hook 'org-mode-hook #'turn-on-org-cdlatex)
-(setq org-latex-src-block-backend 'listings)
-
-(add-to-list 'load-path "/usr/local/bin")
-(add-to-list 'load-path "~/.doom.d/lsp-latex")
 (add-to-list 'load-path "~/.cargo/bin")
-(require 'lsp-latex)
+(add-hook 'latex-mode-hook #'turn-on-cdlatex)
+(add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+(add-hook 'latex-mode-hook (lambda ()
+                             (TeX-fold-mode 1)))
+(setq org-latex-src-block-backend 'listings)
+(map! :map cdlatex-mode-map
+      :i "TAB" #'cdlatex-tab)
 
 (add-hook 'latex-mode-hook (lambda() (add-to-list 'tex-compile-commands '("latexmk -pv -pdf -bibtex %r"))))
-;; "texlab" executable must be located at a directory contained in `exec-path'.
-;; If you want to put "texlab" somewhere else,
-;; you can specify the path to "texlab" as follows:
-;; (setq lsp-latex-texlab-executable "/usr/local/bin/texlab")
-
-(with-eval-after-load "tex-mode"
-  (add-hook 'tex-mode-hook 'lsp)
-  (add-hook 'latex-mode-hook 'lsp)
-  ) ;;with AUCTeX LaTeX mode
-
-;; For YaTeX
-(with-eval-after-load "yatex"
-  (add-hook 'yatex-mode-hook 'lsp))
-
-;; For bibtex
-(with-eval-after-load "bibtex"
-  (add-hook 'bibtex-mode-hook 'lsp))
 
 ;;Projectile
 (after! projectile
@@ -293,19 +276,19 @@ If a method is provided, use -method instead of -testclass."
        :desc "Debug TestNG test" "d" #'run-testng-debug
        :desc "Copy TestNG class" "c" #'copy-testng-classname))
 
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)
-              ("C-n" . 'copilot-next-completion)
-              ("C-p" . 'copilot-previous-completion))
+;; (use-package! copilot
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (:map copilot-completion-map
+;;               ("<tab>" . 'copilot-accept-completion)
+;;               ("TAB" . 'copilot-accept-completion)
+;;               ("C-TAB" . 'copilot-accept-completion-by-word)
+;;               ("C-<tab>" . 'copilot-accept-completion-by-word)
+;;               ("C-n" . 'copilot-next-completion)
+;;               ("C-p" . 'copilot-previous-completion))
 
-  :config
-  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
-  (add-to-list 'copilot-indentation-alist '(org-mode 2))
-  (add-to-list 'copilot-indentation-alist '(text-mode 2))
-  (add-to-list 'copilot-indentation-alist '(closure-mode 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
+;;   :config
+;;   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
+;;   (add-to-list 'copilot-indentation-alist '(org-mode 2))
+;;   (add-to-list 'copilot-indentation-alist '(text-mode 2))
+;;   (add-to-list 'copilot-indentation-alist '(closure-mode 2))
+;;   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
