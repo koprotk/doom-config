@@ -13,8 +13,6 @@
 (package! org-ref)
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
-(package! lsp-latex
-  :recipe (:host github :repo "ROCKTAKEY/lsp-latex" :files ("lsp-latex.el")))
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
