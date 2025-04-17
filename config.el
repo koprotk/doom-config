@@ -38,6 +38,14 @@
 ;;(setq doom-theme 'doom-one)
 ;;(setq doom-theme 'doom-one-light)
 
+(setq doom-font (font-spec :family "JetBrains Mono" :size 12 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 13))
+
+(map! :n "s-=" #'doom/reset-font-size
+      :n "s-+" #'text-scale-increase
+      :n "s--" #'text-scale-decrease)
+
+
 ;; Change the Theme by the sunset sunrise in my timezone
 (use-package circadian
   :ensure t
