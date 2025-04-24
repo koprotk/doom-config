@@ -201,22 +201,49 @@
 (setq org-journal-enable-agenda-integration t)
 (require 'org-journal)
 
-;;Latex
+;;Add cargo bin to path to load
 (add-to-list 'load-path "~/.cargo/bin")
-(add-hook 'latex-mode-hook #'turn-on-cdlatex)
+
+;;Latex
+(add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+(add-hook 'LaTeX-mode-hook 'TeX-master-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
 (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
-(add-hook 'latex-mode-hook (lambda ()
+(add-hook 'LaTeX-mode-hook (lambda ()
                              (TeX-fold-mode 1)))
 (setq org-latex-src-block-backend 'listings)
 (map! :map cdlatex-mode-map
       :i "TAB" #'cdlatex-tab)
+(setq TeX-save-query-function nil)
+(setq TeX-compile-after-save t)
+(setq TeX-view-after-compile t)
 
-(add-hook 'latex-mode-hook (lambda() (add-to-list 'tex-compile-commands '("latexmk -pv -pdf -bibtex %r"))))
+;;(add-hook 'LaTex-mode-hook (lambda() (add-to-list 'tex-compile-commands '("latexmk -pv -pdf -bibtex %r"))))
 
 ;;Projectile
 (after! projectile
   (setq projectile-project-search-path '("~/Projects/"))
   (setq projectile-enable-caching t))
+
+;;Spell check
+;; Set the default language to Spanish
+(setq ispell-dictionary "spanish")
+
+;; Configure ispell to use Hunspell and specify dictionaries
+(setq ispell-program-name "hunspell")
+(setq ispell-dictionary-alist
+      '(("english"
+         "[[:alpha:]]" "[^[:alpha:]]" "w" nil ("-d" "en_US") nil utf-8)
+        ("spanish"
+         "[[:alpha:]]" "[^[:alpha:]]" "w" nil ("-d" "es_ES") nil utf-8)))
+
+;; Permitir cambiar de idioma rápidamente
+(map! :leader
+      :desc "Cambiar diccionario a español"
+      "t l" (lambda () (interactive) (ispell-change-dictionary "español"))
+      :desc "Cambiar diccionario a inglés"
+      "t k" (lambda () (interactive) (ispell-change-dictionary "english")))
 
 ;;Java TestNg custom command:
 (defun get-testng-classname ()
