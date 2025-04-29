@@ -228,20 +228,20 @@
 
 ;;Spell check
 ;; Set the default language to Spanish
-(setq ispell-dictionary "spanish")
+(setq ispell-dictionary "es_ES")
 
 ;; Configure ispell to use Hunspell and specify dictionaries
 (setq ispell-program-name "hunspell")
 (setq ispell-dictionary-alist
       '(("english"
          "[[:alpha:]]" "[^[:alpha:]]" "w" nil ("-d" "en_US") nil utf-8)
-        ("spanish"
+        ("es_ES"
          "[[:alpha:]]" "[^[:alpha:]]" "w" nil ("-d" "es_ES") nil utf-8)))
 
 ;; Permitir cambiar de idioma rápidamente
 (map! :leader
       :desc "Cambiar diccionario a español"
-      "t l" (lambda () (interactive) (ispell-change-dictionary "español"))
+      "t l" (lambda () (interactive) (ispell-change-dictionary "es_ES"))
       :desc "Cambiar diccionario a inglés"
       "t k" (lambda () (interactive) (ispell-change-dictionary "english")))
 
