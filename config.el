@@ -63,7 +63,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory '("~/org"))
+(setq org-directory '("~/my-orgagenda"))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -108,7 +108,8 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-(setq org-agenda-files (directory-files-recursively "~/org" "\\.org$" :follow-symlinks t)) ;;Reviar la forma en que org y org-agenda usen los mismo archivos.
+(setq org-agenda-files (directory-files-recursively "~/my-orgagenda" "\\.org$" :follow-symlinks t)) ;;Revisar la forma en que org y org-agenda usen los mismo archivos.
+(setq diary-file "~/my-orgagenda/diary")
 (setq calendar-week-start-day 1) ;;Inicio de la semana el Lunes b
 (setq org-agenda-include-diary t) ;;Incluír entradas en  org-agenda
 (setq org-agenda-start-with-log-mode t) ;;Mostrar los TO DO cerrados
@@ -125,8 +126,9 @@
 '(holiday-bahai-holidays nil) ;;don't show bahai holiday in calendar
 '(holiday-hebrew-holidays nil)
 '(holiday-islamic-holidays nil)
-(setq holiday-other-holidays
+(setq holiday-local-holidays
       '(
+        (holiday-fixed 5 21 "Día de las Glorias Navales")
         (holiday-fixed 7 16 "Día de la Virgen del Carmen") ;;holiday-fixedd month day "name of the holiday"
         (holiday-fixed 8 15 "Asunción de la Viergen")
         (holiday-fixed 9 18 "Independencia Nacional")
@@ -138,6 +140,7 @@
         (holiday-fixed 12 25 "Navidad")
         )
       )
+(setq calendar-mark-holidays-flag t)
 
 ;;Move lines
 (defun move-line-up ()
@@ -163,7 +166,7 @@
   :after org
   :init (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (file-truename "~/org/org-roam"))
+  (org-roam-directory (file-truename "~/my-orgagenda/org-roam"))
   :config
   (org-roam-db-autosync-enable)
   )
@@ -195,7 +198,7 @@
 (setq org-hide-emphasis-markers t)
 
 ;;Org-journal
-(setq org-journal-dir "~/org/journal")
+(setq org-journal-dir "~/my-orgagenda/journal")
 (setq org-journal-date-format "%A, %d %B %Y")
 (setq org-journal-file-type 'monthly)
 (setq org-journal-enable-agenda-integration t)
@@ -311,19 +314,19 @@ If a method is provided, use -method instead of -testclass."
        :desc "Debug TestNG test" "d" #'run-testng-debug
        :desc "Copy TestNG class" "c" #'copy-testng-classname))
 
-;; (use-package! copilot
-;;   :hook (prog-mode . copilot-mode)
-;;   :bind (:map copilot-completion-map
-;;               ("<tab>" . 'copilot-accept-completion)
-;;               ("TAB" . 'copilot-accept-completion)
-;;               ("C-TAB" . 'copilot-accept-completion-by-word)
-;;               ("C-<tab>" . 'copilot-accept-completion-by-word)
-;;               ("C-n" . 'copilot-next-completion)
-;;               ("C-p" . 'copilot-previous-completion))
+;;(use-package! copilot
+;;  :hook (prog-mode . copilot-mode)
+;;  :bind (:map copilot-completion-map
+;;              ("<tab>" . 'copilot-accept-completion)
+;;              ("TAB" . 'copilot-accept-completion)
+;;              ("C-TAB" . 'copilot-accept-completion-by-word)
+;;              ("C-<tab>" . 'copilot-accept-completion-by-word)
+;;              ("C-n" . 'copilot-next-completion)
+;;              ("C-p" . 'copilot-previous-completion))
 
-;;   :config
-;;   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
-;;   (add-to-list 'copilot-indentation-alist '(org-mode 2))
-;;   (add-to-list 'copilot-indentation-alist '(text-mode 2))
-;;   (add-to-list 'copilot-indentation-alist '(closure-mode 2))
-;;   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
+;;  :config
+;;  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
+;;  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+;;  (add-to-list 'copilot-indentation-alist '(text-mode 2))
+;;  (add-to-list 'copilot-indentation-alist '(closure-mode 2))
+;;  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
