@@ -63,7 +63,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory '("~/my-orgagenda"))
+(setq org-directory '("~/org"))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -108,8 +108,13 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-(setq org-agenda-files (directory-files-recursively "~/my-orgagenda" "\\.org$" :follow-symlinks t)) ;;Revisar la forma en que org y org-agenda usen los mismo archivos.
-(setq diary-file "~/my-orgagenda/diary")
+(setq org-agenda-files '("~/org/uandes.org"
+                         "~/org/udp.org"
+                         "~/org/modmed.org"
+                         "~/org/postulaciones.org"
+                         "~/org/personal.org"
+                         )) ;;Revisar la forma en que org y org-agenda usen los mismo archivos.
+(setq diary-file "~/org/diary")
 (setq calendar-week-start-day 1) ;;Inicio de la semana el Lunes b
 (setq org-agenda-include-diary t) ;;Incluír entradas en  org-agenda
 (setq org-agenda-start-with-log-mode t) ;;Mostrar los TO DO cerrados
@@ -166,7 +171,7 @@
   :after org
   :init (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory (file-truename "~/my-orgagenda/org-roam"))
+  (org-roam-directory (file-truename "~/org/org-roam"))
   :config
   (org-roam-db-autosync-enable)
   )
@@ -198,7 +203,7 @@
 (setq org-hide-emphasis-markers t)
 
 ;;Org-journal
-(setq org-journal-dir "~/my-orgagenda/journal")
+(setq org-journal-dir "~/org/journal")
 (setq org-journal-date-format "%A, %d %B %Y")
 (setq org-journal-file-type 'monthly)
 (setq org-journal-enable-agenda-integration t)
