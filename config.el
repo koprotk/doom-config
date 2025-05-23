@@ -213,19 +213,18 @@
 (add-to-list 'load-path "~/.cargo/bin")
 
 ;;Latex
-(add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
-(add-hook 'LaTeX-mode-hook 'TeX-master-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
-(add-hook 'org-mode-hook #'turn-on-org-cdlatex)
-(add-hook 'LaTeX-mode-hook (lambda ()
-                             (TeX-fold-mode 1)))
-(setq org-latex-src-block-backend 'listings)
-(map! :map cdlatex-mode-map
-      :i "TAB" #'cdlatex-tab)
-(setq TeX-save-query-function nil)
-(setq TeX-compile-after-save t)
-(setq TeX-view-after-compile t)
+;; (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+;; (add-hook 'LaTeX-mode-hook 'TeX-master-mode)
+;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+;; (add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
+;; (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+;; (add-hook 'LaTeX-mode-hook (lambda () (TeX-fold-mode 1)))
+;; (setq org-latex-src-block-backend 'listings)
+;; (map! :map cdlatex-mode-map
+;;       :i "TAB" #'cdlatex-tab)
+;; (setq TeX-save-query-function nil)
+;; (setq TeX-compile-after-save t)
+;; (setq TeX-view-after-compile t)
 
 ;;(add-hook 'LaTex-mode-hook (lambda() (add-to-list 'tex-compile-commands '("latexmk -pv -pdf -bibtex %r"))))
 
