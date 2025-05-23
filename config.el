@@ -105,15 +105,16 @@
 
 ;;Org mode config
 (require 'org)
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
+;; (setq org-agenda-files '("~/org/uandes.org"
+;;                          "~/org/udp.org"
+;;                          "~/org/modmed.org"
+;;                          "~/org/postulaciones.org"
+;;                          "~/org/personal.org"
+;;                          ))
+;;Revisar la forma en que org y org-agenda usen los mismo archivos.
 (setq org-log-done t)
-(setq org-agenda-files '("~/org/uandes.org"
-                         "~/org/udp.org"
-                         "~/org/modmed.org"
-                         "~/org/postulaciones.org"
-                         "~/org/personal.org"
-                         )) ;;Revisar la forma en que org y org-agenda usen los mismo archivos.
 (setq diary-file "~/org/diary")
 (setq calendar-week-start-day 1) ;;Inicio de la semana el Lunes b
 (setq org-agenda-include-diary t) ;;Incluír entradas en  org-agenda
