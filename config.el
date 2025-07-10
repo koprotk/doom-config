@@ -38,7 +38,7 @@
 ;;(setq doom-theme 'doom-one)
 ;;(setq doom-theme 'doom-one-light)
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 12 :weight 'light)
+(setq doom-font (font-spec :family "JetBrains Mono Nerd" :size 12 :weight 'light)
       doom-variable-pitch-font (font-spec :family "Noto Serif" :size 13))
 
 (map! :n "s-=" #'doom/reset-font-size
