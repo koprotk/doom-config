@@ -47,23 +47,23 @@
 
 
 ;; Change the Theme by the sunset sunrise in my timezone
-(use-package circadian
-  :ensure t
-  :config
-  (setq calendar-latitude -33.4489)
-  (setq calendar-longitude -70.6693)
-  (setq circadian-themes '((:sunrise . doom-one-light)
-                           (:sunset  . doom-one)))
-  (circadian-setup))
+;; (use-package circadian
+;;   :ensure t
+;;   :config
+;;   (setq calendar-latitude -33.4489)
+;;   (setq calendar-longitude -70.6693)
+;;   (setq circadian-themes '((:sunrise . doom-one-light)
+;;                            (:sunset  . doom-one)))
+;;   (circadian-setup))
 
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+;; (setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory '("~/org"))
+;; (setq org-directory '("~/org"))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -98,13 +98,13 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;Autosave
-(setq auto-save-default t
-      auto-save-visited-mode t
-      make-backup-files t)
+;; Autosave
+;; (setq auto-save-default t
+;;       auto-save-visited-mode t
+;;       make-backup-files t)
 
-;;Org mode config
-(require 'org)
+;; Org mode config
+;; (require 'org)
 ;; (define-key global-map "\C-cl" 'org-store-link)
 ;; (define-key global-map "\C-ca" 'org-agenda)
 ;; (setq org-agenda-files '("~/org/uandes.org"
@@ -113,14 +113,14 @@
 ;;                          "~/org/postulaciones.org"
 ;;                          "~/org/personal.org"
 ;;                          ))
-;;Revisar la forma en que org y org-agenda usen los mismo archivos.
-(setq org-log-done t)
-(setq diary-file "~/org/diary")
-(setq calendar-week-start-day 1) ;;Inicio de la semana el Lunes b
-(setq org-agenda-include-diary t) ;;Incluír entradas en  org-agenda
-(setq org-agenda-start-with-log-mode t) ;;Mostrar los TO DO cerrados
+;; Revisar la forma en que org y org-agenda usen los mismo archivos.
+;; (setq org-log-done t)
+;; (setq diary-file "~/org/diary")
+;; (setq calendar-week-start-day 1) ;;Inicio de la semana el Lunes b
+;; (setq org-agenda-include-diary t) ;;Incluír entradas en  org-agenda
+;; (setq org-agenda-start-with-log-mode t) ;;Mostrar los TO DO cerrados
 
-;;Custom To DO
+;; Custom To DO
 ;; (setq org-todo-keywords
 ;;       '((sequence "TO BUILD" "BUILDED" "TESTING" "COMMENTING" "|" "DONE")
 ;;         (sequence "[ ]" "[-]" "|" "[x]")
@@ -128,7 +128,7 @@
 ;;         )
 ;;       )
 
-;;Holidays in orgmode
+;; Holidays in orgmode
 '(holiday-bahai-holidays nil) ;;don't show bahai holiday in calendar
 '(holiday-hebrew-holidays nil)
 '(holiday-islamic-holidays nil)
@@ -167,16 +167,16 @@
 (global-set-key (kbd "M-<up>")  'move-line-up)
 (global-set-key (kbd "M-<down>")  'move-line-down)
 
-;;Org mode ROAM config
-(use-package org-roam
-  :after org
-  :init (setq org-roam-v2-ack t)
-  :custom
-  (org-roam-directory (file-truename "~/org/org-roam"))
-  :config
-  (org-roam-db-autosync-enable)
-  )
-;;:bind (("C-c n i" . org-roam-find)
+;; Org mode ROAM config
+;; (use-package org-roam
+;;   :after org
+;;   :init (setq org-roam-v2-ack t)
+;;   :custom
+;;   (org-roam-directory (file-truename "~/org/org-roam"))
+;;   :config
+;;   (org-roam-db-autosync-enable)
+;;   )
+;; :bind (("C-c n i" . org-roam-find)
 ;;       ("C-c n r" . org-roam-random)
 ;;       (:map org-mode-map
 ;;             (("C-c n i" . org-roam-node-insert)
@@ -185,30 +185,30 @@
 ;;              ("C-c n a" . org-roam-alias-add)
 ;;              ("C-c m l" . org-roam-buffer-toggle)))))
 
-;;Org Babel
-(setq ob-async-no-async-languages-alist '("python" "jupyter-python"))
-(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
-(setq +python-jupyter-repl-args '("--simple-prompt"))
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t) ;; Other languages
-   (shell . t)
-   ;; Python & Jupyter
-   (python . t)
-   (jupyter . t)))
+;; Org Babel
+;; (setq ob-async-no-async-languages-alist '("python" "jupyter-python"))
+;; (setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
+;; (setq +python-jupyter-repl-args '("--simple-prompt"))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((emacs-lisp . t) ;; Other languages
+;;    (shell . t)
+;;    ;; Python & Jupyter
+;;    (python . t)
+;;    (jupyter . t)))
 
-;;(org-babel-jupyter-override-src-block "python")
-(setenv "PYDEVD_DISABLE_FILE_VALIDATION" "1")
+;; (org-babel-jupyter-override-src-block "python")
+;; (setenv "PYDEVD_DISABLE_FILE_VALIDATION" "1")
 
-;;Delete style marks
-(setq org-hide-emphasis-markers t)
+;; Delete style marks
+;; (setq org-hide-emphasis-markers t)
 
-;;Org-journal
-(setq org-journal-dir "~/org/journal")
-(setq org-journal-date-format "%A, %d %B %Y")
-(setq org-journal-file-type 'monthly)
-(setq org-journal-enable-agenda-integration t)
-(require 'org-journal)
+;; Org-journal
+;; (setq org-journal-dir "~/org/journal")
+;; (setq org-journal-date-format "%A, %d %B %Y")
+;; (setq org-journal-file-type 'monthly)
+;; (setq org-journal-enable-agenda-integration t)
+;; (require 'org-journal)
 
 ;;Add cargo bin to path to load
 (add-to-list 'load-path "~/.cargo/bin")
@@ -229,10 +229,10 @@
 
 ;;(add-hook 'LaTex-mode-hook (lambda() (add-to-list 'tex-compile-commands '("latexmk -pv -pdf -bibtex %r"))))
 
-;;Projectile
-(after! projectile
-  (setq projectile-project-search-path '("~/Projects/"))
-  (setq projectile-enable-caching t))
+;; Projectile
+;; (after! projectile
+;;   (setq projectile-project-search-path '("~/Projects/"))
+;;   (setq projectile-enable-caching t))
 
 ;;Spell check
 ;; Set the default language to Spanish
@@ -253,71 +253,71 @@
       :desc "Cambiar diccionario a inglés"
       "t k" (lambda () (interactive) (ispell-change-dictionary "english")))
 
-;;Java TestNg custom command:
-(defun get-testng-classname ()
-  "Get the fully qualified TestNG class name from the current buffer."
-  (let* ((default-directory (project-root (project-current t))) ;; Ensure execution from project root
-         (file-path (file-relative-name (buffer-file-name) (concat default-directory "src/"))) ;; Get relative path
-         (test-class (replace-regexp-in-string "/" "." (file-name-sans-extension file-path)))) ;; Convert to FQCN
-    test-class)) ;; Return class name
+;; Java TestNg custom command:
+;; (defun get-testng-classname ()
+;;   "Get the fully qualified TestNG class name from the current buffer."
+;;   (let* ((default-directory (project-root (project-current t))) ;; Ensure execution from project root
+;;          (file-path (file-relative-name (buffer-file-name) (concat default-directory "src/"))) ;; Get relative path
+;;          (test-class (replace-regexp-in-string "/" "." (file-name-sans-extension file-path)))) ;; Convert to FQCN
+;;     test-class)) ;; Return class name
 
-(defun run-testng ()
-  "Run a TestNG test from the current buffer.
-Prompts the user for a method name. If left empty, runs the whole test class.
-Otherwise, runs the specified method."
-  (interactive)
-  ;; Ensure projectile is open before
+;; (defun run-testng ()
+;;   "Run a TestNG test from the current buffer.
+;; Prompts the user for a method name. If left empty, runs the whole test class.
+;; Otherwise, runs the specified method."
+;;   (interactive)
+;;   ;; Ensure projectile is open before
 
-  (let* ((classpath "./build/libs/dependencies/*:./build/classes/java/main:./build/resources/main")
-         (config-dir "./build/classes/java/main/com/modmed/bugspray/config")
-         (testng-classpath "./test/com/modmed/bugspray/core/suites")
-         (test-class (get-testng-classname)) ;; Use reusable function
-         (method-name (read-string "Enter method name (leave empty to run entire class): "))
-         (testng-args (if (string-empty-p method-name)
-                          (format "-testclass %s" test-class)
-                        (format "-methods %s.%s" test-class method-name)))
-         (default-directory (projectile-project-root))
+;;   (let* ((classpath "./build/libs/dependencies/*:./build/classes/java/main:./build/resources/main")
+;;          (config-dir "./build/classes/java/main/com/modmed/bugspray/config")
+;;          (testng-classpath "./test/com/modmed/bugspray/core/suites")
+;;          (test-class (get-testng-classname)) ;; Use reusable function
+;;          (method-name (read-string "Enter method name (leave empty to run entire class): "))
+;;          (testng-args (if (string-empty-p method-name)
+;;                           (format "-testclass %s" test-class)
+;;                         (format "-methods %s.%s" test-class method-name)))
+;;          (default-directory (projectile-project-root))
 
-         (command (format "./gradlew build && java -Xms512m -Xmx1024m -cp \"%s\" -Dconfig.dir=%s -Dtestng.test.classpath=%s org.testng.TestNG %s"
-                          classpath config-dir testng-classpath testng-args)))
+;;          (command (format "./gradlew build && java -Xms512m -Xmx1024m -cp \"%s\" -Dconfig.dir=%s -Dtestng.test.classpath=%s org.testng.TestNG %s"
+;;                           classpath config-dir testng-classpath testng-args)))
 
-    ;; Debugging messages
-    (message "This is the default directory: %s" default-directory)
-    (message "This is the get-testng-classname: %s" test-class)
-    ;; Run the command
-    (projectile-run-async-shell-command-in-root command)))
+;;     ;; Debugging messages
+;;     (message "This is the default directory: %s" default-directory)
+;;     (message "This is the get-testng-classname: %s" test-class)
+;;     ;; Run the command
+;;     (projectile-run-async-shell-command-in-root command)))
 
 
-(defun copy-testng-classname ()
-  "Copy the fully qualified TestNG class name to the clipboard."
-  (interactive)
-  (let ((test-class (get-testng-classname)))
-    (kill-new test-class)
-    (message "Copied to clipboard: %s" test-class)))
+;; (defun copy-testng-classname ()
+;;   "Copy the fully qualified TestNG class name to the clipboard."
+;;   (interactive)
+;;   (let ((test-class (get-testng-classname)))
+;;     (kill-new test-class)
+;;     (message "Copied to clipboard: %s" test-class)))
 
-(defun run-testng-debug ()
-  "Compile the project, then run TestNG test in JDB inside a vterm shell.
-If a method is provided, use -method instead of -testclass."
-  (interactive)
-  (let* ((sourcepath "./build/classes/java/main:./build/resources/main") ;; Ensure project root
-         (classpath "./build/libs/dependencies/*:./build/classes/java/main:./build/resources/main")
-         (config-dir "./build/classes/java/main/com/modmed/bugspray/config")
-         (testng-classpath "./test/com/modmed/bugspray/core/suites")
-         (test-class (or (get-testng-classname) "")) ;; Get test class
-         (method-name (read-string "Enter method name (leave empty to run whole class): " nil nil "")) ;; Ask user for method
-         (testng-args (if (string-empty-p method-name)
-                          (format "-testclass %s" test-class)
-                        (format "-methods %s.%s" test-class method-name)))
-         (default-directory (projectile-project-root))
-         (command (format "./gradlew build && jdb -Xms512m -Xmx1024m -sourcepath \"%s\" -classpath \"%s\" -Dtestng.test.classpath=%s -Dconfig.dir=%s org.testng.TestNG %s"
-                          sourcepath classpath testng-classpath config-dir testng-args)))
-    (compile command)))
+;; (defun run-testng-debug ()
+;;   "Compile the project, then run TestNG test in JDB inside a vterm shell.
+;; If a method is provided, use -method instead of -testclass."
+;;   (interactive)
+;;   (let* ((sourcepath "./build/classes/java/main:./build/resources/main") ;; Ensure project root
+;;          (classpath "./build/libs/dependencies/*:./build/classes/java/main:./build/resources/main")
+;;          (config-dir "./build/classes/java/main/com/modmed/bugspray/config")
+;;          (testng-classpath "./test/com/modmed/bugspray/core/suites")
+;;          (test-class (or (get-testng-classname) "")) ;; Get test class
+;;          (method-name (read-string "Enter method name (leave empty to run whole class): " nil nil "")) ;; Ask user for method
+;;          (testng-args (if (string-empty-p method-name)
+;;                           (format "-testclass %s" test-class)
+;;                         (format "-methods %s.%s" test-class method-name)))
+;;          (default-directory (projectile-project-root))
+;;          (command (format "./gradlew build && jdb -Xms512m -Xmx1024m -sourcepath \"%s\" -classpath \"%s\" -Dtestng.test.classpath=%s -Dconfig.dir=%s org.testng.TestNG %s"
+;;                           sourcepath classpath testng-classpath config-dir testng-args)))
+;;     (compile command)))
 
-(map! :leader
-      (:prefix ("m" . "TestNG")
-       :desc "Run TestNG test" "r" #'run-testng
-       :desc "Debug TestNG test" "d" #'run-testng-debug
-       :desc "Copy TestNG class" "c" #'copy-testng-classname))
+;; (map! :leader
+;;       (:prefix ("m" . "TestNG")
+;;        :desc "Run TestNG test" "r" #'run-testng
+;;        :desc "Debug TestNG test" "d" #'run-testng-debug
+;;        :desc "Copy TestNG class" "c" #'copy-testng-classname))
 
 ;;(use-package! copilot
 ;;  :hook (prog-mode . copilot-mode)
