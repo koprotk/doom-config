@@ -7,7 +7,8 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
                                         ;(package! some-package)
-;;(package! circadian)
+
+(package! circadian)
 (package! csv-mode)
 (package! org-ref)
 (package! copilot
